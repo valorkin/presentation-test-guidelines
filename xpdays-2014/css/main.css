@@ -1,3 +1,7 @@
+@import url(//fonts.googleapis.com/css?family=Droid+Serif);
+@import url(//fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url(//fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
 body {
     font-family: 'Droid Serif';
 }
@@ -147,4 +151,13 @@ code {
     width: 75%;
     float: right;
     padding-top: 1em;
+}
+
+.green-text {
+    color: #00cc00;
+}
+
+.w748 > img {
+    max-width: 748px;
+    max-height: 566px;
 }
