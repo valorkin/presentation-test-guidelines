@@ -1,6 +1,23 @@
+/*
 @import url(//fonts.googleapis.com/css?family=Droid+Serif);
 @import url(//fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 @import url(//fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+*/
+
+@font-face {
+    font-family: Yanone Kaffeesatz;
+    src: url('../fonts/Yanone_Kaffeesatz/YanoneKaffeesatz-Regular.ttf');
+}
+
+@font-face {
+    font-family: Ubuntu Mono;
+    src: url('../fonts/Ubuntu_Mono/UbuntuMono-Regular.ttf');
+}
+
+@font-face {
+    font-family: Droid Serif; /* Имя шрифта */
+    src: url('../fonts/Droid_Serif/DroidSerif.ttf');
+}
 
 body {
     font-family: 'Droid Serif';
@@ -158,6 +175,8 @@ code {
 }
 
 .w748 > img {
-    max-width: 748px;
-    max-height: 566px;
+    width: 748px;
+}
+.h566 > img{
+    height: 566px;
 }

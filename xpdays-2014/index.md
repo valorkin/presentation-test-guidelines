@@ -55,7 +55,9 @@ Behavior-driven development
 - Добавлять сюда новые тесты страшнее, чем рефакторить legacy code.
 
 ---
-![кубик рубика](http://nibler.ru/uploads/users/8161/2013-03-12/rubika-kubika-vidy-eto-interesno-poznavatelno-kartinki_4265216319.jpg)
+
+template: inverse
+.h566[![кубик рубика](http://nibler.ru/uploads/users/8161/2013-03-12/rubika-kubika-vidy-eto-interesno-poznavatelno-kartinki_4265216319.jpg)]
 
 ???
 
@@ -132,7 +134,7 @@ template: inverse
 
 ---
 template: inverse
-.w748[![ok](images/happy_flow_not_ok.jpg)]
+.h566[![ok](images/happy_flow_not_ok.jpg)]
 
 ???
 
@@ -195,7 +197,7 @@ template: inverse
 - И ставим цель: 100% покрытие кода тестами
 ---
 template: inverse
-.w748[![](http://thumbs.dreamstime.com/x/fire-speedometer-16726304.jpg)]
+.h566[![](http://thumbs.dreamstime.com/x/fire-speedometer-16726304.jpg)]
 
 ???
 
