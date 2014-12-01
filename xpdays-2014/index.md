@@ -526,6 +526,14 @@ layout: false
 template: inverse
 # F.I.R.S.T
 
+???
+
+- fast
+- isolated
+- repeatable
+- self-verifying
+- timely
+
 ---
 layout: false
 .left-column[
@@ -606,3 +614,85 @@ layout: false
 - **S**elf-verifying — tests should include assertions; no human intervention needed
 ###- **T**imely — tests should be written along with the production code
 ]
+
+---
+template: inverse
+# Unit test patterns
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - state based
+]
+
+.right-column[
+## State-based tests Pattern
+
+
+```js
+// here will be sample
+```
+]
+
+???
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - state based
+  ### - interaction based
+]
+
+.right-column[
+## Interaction-based tests Pattern
+
+
+```js
+// here will be sample
+```
+]
+
+???
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - state based
+  ### - interaction based
+  ### - exception testing
+]
+
+.right-column[
+## Exception Testing Pattern
+
+
+```js
+// here will be sample
+```
+]
+
+???
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - state based
+  ### - interaction based
+  ### - exception testing
+  ### - algorithm testing
+]
+
+.right-column[
+## Algorithm Testing Pattern
+
+
+```js
+// here will be sample
+```
+]
+
+???
