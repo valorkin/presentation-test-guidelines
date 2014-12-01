@@ -422,4 +422,101 @@ layout: false
 Комбинация нескольких анти-паттернов, в особенности «Зайца» и Гиганта. Такой unit-тест состоит из единственного метода, который тестирует всю функциональность объета. Типичным индикатором проблемы являтся название тестового метода по названию unit-теста и большое количество строк инициализации и assert-ов.
 
 ---
+template: inverse
+#Development style
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - KISS
+]
+
+.right-column[
+## KISS(Keep it simple stupid)
+]
+
+???
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - KISS
+  ### - YAGNI
+]
+
+.right-column[
+## YAGNI(You aren't gonna need it)
+]
+???
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - KISS
+  ### - YAGNI
+  ### - fake it till you make it
+]
+
+.right-column[
+## Fake it till you make it
+]
+???
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - KISS
+  ### - YAGNI
+  ### - fake it till you make it
+  ### - make it works then make it pretty
+]
+
+.right-column[
+## Make it works then make it pretty
+]
+???
+
+---
+template: inverse
+#Tests structure
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### 1. Setup
+  ### 2. Execution
+  ### 3. Validation
+  ### 4. Cleanup
+]
+
+.right-column[
+## Test suite structure
+
+```js
+// here will be sample
+```
+]
+???
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### 1. Arrange
+  ### 2. Act
+  ### 3. Assert
+]
+
+.right-column[
+## Test case structure
+
+```js
+// here will be sample
+```
+]
+???
 
