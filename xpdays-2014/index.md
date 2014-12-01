@@ -522,3 +522,87 @@ layout: false
 ]
 ???
 
+---
+template: inverse
+# F.I.R.S.T
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - fast
+]
+
+.right-column[
+## F.I.R.S.T
+###- **F**ast — tests should be able to be executed often
+]
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - fast
+  ### - isolated
+]
+
+.right-column[
+## F.I.R.S.T
+- **F**ast — tests should be able to be executed often
+###- **I**solated — tests on their own cannot depend on external factors or on the result of another test
+]
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - fast
+  ### - isolated
+  ### - repeatable
+]
+
+.right-column[
+## F.I.R.S.T
+- **F**ast — tests should be able to be executed often
+- **I**solated — tests on their own cannot depend on external factors or on the result of another test
+###- **R**epeatable — tests should have the same result every time we run them.
+]
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - fast
+  ### - isolated
+  ### - repeatable
+  ### - self-verifying
+]
+
+.right-column[
+## F.I.R.S.T
+- **F**ast — tests should be able to be executed often
+- **I**solated — tests on their own cannot depend on external factors or on the result of another test
+- **R**epeatable — tests should have the same result every time we run them
+###- **S**elf-verifying — tests should include assertions; no human intervention needed
+]
+
+---
+
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - fast
+  ### - isolated
+  ### - repeatable
+  ### - self-verifying
+  ### - timely
+]
+
+.right-column[
+## F.I.R.S.T
+- **F**ast — tests should be able to be executed often
+- **I**solated — tests on their own cannot depend on external factors or on the result of another test
+- **R**epeatable — tests should have the same result every time we run them
+- **S**elf-verifying — tests should include assertions; no human intervention needed
+###- **T**imely — tests should be written along with the production code
+]
