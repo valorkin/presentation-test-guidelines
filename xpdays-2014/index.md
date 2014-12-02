@@ -4,23 +4,24 @@ class: center, middle, inverse
 page: 1
 ---
 #Writing tests
-
-practical guidelines including
-
-patterns, anti-patterns and best practices
+###practical guidelines including
+###patterns, anti-patterns and best practices
 .footnote[@valorkin]
+
 ???
+
 - У всех тестов, как и любого когда есть одна общая проблема: они написаны людьми.
-- Какие цели мы преследнуем и что нами движет при написании тестов.
+- Что самое главное в написании тестов? Знание кода? Скилл? Паттерны?
+- Какие цели мы преследуем и что нами движет при написании тестов.
 
 ---
 ##TDD
 
-Test Driven Development
+###Test Driven Development
 
 ???
 - итак, в первую очередь
-- TDD – замечательная идея, положившая начало культуре тестирования
+- TDD - замечательная идея, положившая начало культуре тестирования
 
 ---
 # Development cycle
@@ -32,9 +33,9 @@ Test Driven Development
 этом заканчиваются
 
 ---
-## BDD
+##BDD
 
-Behavior-driven development
+###Behavior-driven development
 
 ???
 - BDD привносит смысл и читабельность тестовых спецификаций
@@ -46,8 +47,8 @@ Behavior-driven development
 
 ???
 
-- Идея TDD в написании сначала failing теста, а после кода, который пройдёт этот
-тест, утрируется до следования « Зелёному пути».
+- Идея TDD в написании сначала failing теста, а потом кода, который пройдёт этот
+тест, утрируют до следования "Зелёному пути".
 
 - В итоге тесты написаны в отрыве от реальной жизни и общей концепции, не
 связаны в test suits и больше напоминают свалку.
@@ -61,12 +62,12 @@ template: inverse
 
 ???
 
-- Первое, что приходит в голову при виде подобных тестов – Кубик Рубика…
+- Первое, что приходит в голову при виде подобных тестов - Кубик Рубика …
 - И собирать его совсем не хочется.
 
 ---
 
-#Heapsort
+# Heap-sort
 
 ???
 
@@ -113,7 +114,7 @@ layout: false
 
 ---
 template: inverse
-#Happy flow
+#Happy flows
 
 ???
 - следующий этап эволюции the green way
@@ -184,15 +185,30 @@ template: inverse
 
 ???
 
-Тесты должны проверять систему не только на положительных данных,
+- Тесты должны проверять систему не только на положительных данных,
 но и на негативных и исключительных.
+- Могло быть и хуже
 
+---
+
+template: inverse
+#No tests!?
+--
+
+##- No time
+--
+
+##- Code is to hard
+
+--
+##- We are evolving
 ---
 template: inverse
 #The Race
 
 ???
 
+- Но не будем о грустном
 - Нам повезло, мы собираем метрики, видим покрытие кода.
 - И ставим цель: 100% покрытие кода тестами
 ---
@@ -201,8 +217,8 @@ template: inverse
 
 ???
 
-- вся тима в экстазе, каждый коммит приближает желанную цель
-- каждый коммит приблежает желанную цель
+- вся тима в экстазе
+- каждый коммит приближает желанную цель
 - 2 недели - 100% coverage достигнут
 - все найденные баги пофикшены
 
@@ -270,16 +286,6 @@ layout: false
 ???
 
 Unit-тест, который нарушает инкапсуляцию в попытке достичь 100% покрытия кода (code coverage) и при этом знает слишком много о тестируемой системе. При рефакторинге системы такой тест слишком часто ломается и требует исправлений.
-
----
-template: inverse
-#No tests!?
---
-
-## - No time
---
-
-##- Code is to hard
 
 ---
 template: inverse
@@ -509,8 +515,62 @@ layout: false
 .left-column[
   ## &nbsp;
   ### 1. Arrange
+]
+
+.right-column[
+## Test case structure
+
+###**Arrange**: setup everything needed for the running the tested code. This includes any initialization of dependencies, mocks and data needed for the test to run
+]
+???
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### 1. Arrange
+  ### 2. Act
+]
+
+.right-column[
+## Test case structure
+
+**Arrange**: setup everything needed for the running the tested code. This includes any initialization of dependencies, mocks and data needed for the test to run.
+
+### **Act**: Invoke the code under test.
+]
+???
+
+---
+
+layout: false
+.left-column[
+  ## &nbsp;
+  ### 1. Arrange
   ### 2. Act
   ### 3. Assert
+]
+
+.right-column[
+## Test case structure
+
+**Arrange**: setup everything needed for the running the tested code. This includes any initialization of dependencies, mocks and data needed for the test to run.
+
+**Act**: Invoke the code under test.
+
+### **Assert**: Specify the pass criteria for the test, which fails it if not met.
+]
+???
+
+---
+
+layout: false
+.left-column[
+  ## &nbsp;
+  ### 1. Arrange
+  ### 2. Act
+  ### 3. Assert
+  ### Sample
 ]
 
 .right-column[
@@ -521,8 +581,8 @@ layout: false
 ```
 ]
 ???
-
 ---
+
 template: inverse
 # F.I.R.S.T
 
@@ -637,6 +697,13 @@ layout: false
 
 ???
 
+Test code result exposed in code state change
+- Values directly returned from the method
+- Values exposed through the object fields
+- Values exposed through other methods or properties of the object
+- Values that come from outside the object, for example static state or a shared data structure.
+
+Pros: fast, low coupled, readability
 ---
 layout: false
 .left-column[
@@ -655,6 +722,15 @@ layout: false
 ]
 
 ???
+
+If tested methods do not expose results directly (logs, transactions)
+- tested logic calls methods on other dependencies
+- check: method got called
+- check: passed arguments
+ 
+cons: 
+- require knowledge about internals
+- less robust
 
 ---
 layout: false
@@ -676,6 +752,10 @@ layout: false
 
 ???
 
+Throwing exceptions is a part of app life loop?
+
+At least exceptions handling
+
 ---
 layout: false
 .left-column[
@@ -696,3 +776,5 @@ layout: false
 ]
 
 ???
+
+Is all about math or internal logic
