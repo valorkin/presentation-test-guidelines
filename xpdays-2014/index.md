@@ -344,7 +344,7 @@ template: inverse
 #Sh*t happens
 
 ---
-#template: inverse
+template: inverse
 ## 100% covered
 
 # 50% tested
@@ -416,6 +416,8 @@ Unit-тест, который нарушает инкапсуляцию в по�
 ---
 template: inverse
 # Full speed ahead!!!
+---
+template: inverse
 ![full speed ahead](images/full_speed_ahead.jpg)
 ???
 Сейчас я буду всё тестировать
@@ -597,13 +599,14 @@ layout: false
 ???
 Счётчик (The Enumerator)
 
-Unit-тест, в котором все кейсы плохо именованы (например, test1, test2, test3). В результате назначение тест-кейса неясно и единственный способ понять, что сломалось — лезть в код теста и молиться, чтобы он оказался понятным.
+Unit-тест, в котором все кейсы плохо именованы (например, test1, test2, test3). В результате назначение тест-кейса неясно и единственный способ понять, что сломалось - лезть в код теста и молиться, чтобы он оказался понятным.
 
 ---
 template: inverse
 #The ice-cream cone
 .h566[![](images/the_ice_cream_cone.png)]
-
+???
+ну и наиболее распространённая ситуация
 ---
 template: inverse
 #Common anti-patterns
@@ -799,7 +802,8 @@ layout: false
 ]
 
 .right-column[
-## KISS(Keep it simple stupid)
+##&nbsp;
+##- Keep it simple stupid
 ]
 
 ???
@@ -813,7 +817,9 @@ layout: false
 ]
 
 .right-column[
-## YAGNI(You aren't gonna need it)
+##&nbsp;
+###- Keep it simple stupid
+##- You aren't gonna need it
 ]
 ???
 
@@ -823,11 +829,14 @@ layout: false
   ## &nbsp;
   ### - KISS
   ### - YAGNI
-  ### - fake it till you make it
+  ### - fake it
 ]
 
 .right-column[
-## Fake it till you make it
+##&nbsp;
+###- Keep it simple stupid
+###- You aren't gonna need it
+##- Fake it till you make it
 ]
 ???
 
@@ -837,14 +846,22 @@ layout: false
   ## &nbsp;
   ### - KISS
   ### - YAGNI
-  ### - fake it till you make it
-  ### - make it works then make it pretty
+  ### - fake it
+  ### - make it
 ]
 
 .right-column[
-## Make it works then make it pretty
+##&nbsp;
+###- Keep it simple stupid
+###- You aren't gonna need it
+###- Fake it till you make it
+##- Make it works then make it pretty
 ]
 ???
+
+---
+template: inverse
+#Always test your program with normal, boundary and extreme data sets.
 
 ---
 template: inverse
@@ -949,29 +966,9 @@ layout: false
 ???
 
 Is all about math or internal logic
-
 ---
 template: inverse
 #Tests structure
-
----
-layout: false
-.left-column[
-  ## &nbsp;
-  ### 1. Setup
-  ### 2. Execution
-  ### 3. Validation
-  ### 4. Cleanup
-]
-
-.right-column[
-## Test suite structure
-
-```js
-// here will be sample
-```
-]
-???
 
 ---
 layout: false
@@ -1046,6 +1043,117 @@ layout: false
 ???
 ---
 
+layout: false
+.left-column[
+  ## &nbsp;
+  ### 1. Setup
+  ### 2. Execution
+  ### 3. Validation
+  ### 4. Cleanup
+]
+
+.right-column[
+## Test suite structure
+
+```js
+// here will be sample
+```
+]
+???
+---
+template:inverse
+#A few simple rules to follow
+---
+
+layout: false
+.left-column[
+  ### - behaviour slicing
+]
+
+.right-column[
+##- Keep test cases focused, one unit test per behaviour
+]
+---
+
+layout: false
+.left-column[
+  ###- behaviour slicing
+  ###- builder 
+]
+
+.right-column[
+###- Keep test cases focused, one unit test per behaviour
+##- Use builder pattern to Arrange and CleanUp
+```js
+// here will be code sample
+```
+]
+
+---
+
+layout: false
+.left-column[
+  ###- behaviour slicing
+  ###- builder
+  ###- extract simulators 
+]
+
+.right-column[
+###- Keep test cases focused, one unit test per behaviour
+###- Use builder pattern to Arrange and CleanUp
+##- Extract and aggregate stubs into simulators, and **test** them
+]
+
+---
+template: inverse
+#80/20
+---
+
+layout: false
+.left-column[
+  ###- behaviour slicing
+  ###- builder
+  ###- extract simulators 
+  ###- risk based testing
+  ###- test code matter
+]
+
+.right-column[
+###- Keep test cases focused, one unit test per behaviour
+###- Use builder pattern to Arrange and CleanUp
+###- Extract and aggregate stubs into simulators, and **test** them
+###- Test only what is important
+##- Test code important like production code
+]
+
+---
+
+layout: false
+.left-column[
+  ###- behaviour slicing
+  ###- builder
+  ###- extract simulators 
+  ###- risk based testing
+  ###- test code matter
+  ###- reviews
+]
+
+.right-column[
+###- Keep test cases focused, one unit test per behaviour
+###- Use builder pattern to Arrange and CleanUp
+###- Extract and aggregate stubs into simulators, and **test** them
+###- Test only what is important
+###- Test code important like production code
+##- Review your test code
+]
+
+---
+template: inverse
+![okay](images/okay.jpeg)
+???
+ну а если вы не ревьювите production code, ну ж ладно
+---
+
 template: inverse
 # F.I.R.S.T
 
@@ -1066,7 +1174,7 @@ layout: false
 
 .right-column[
 ## F.I.R.S.T
-###- **F**ast — tests should be able to be executed often
+###- **F**ast - tests should be able to be executed often
 ]
 
 ---
@@ -1079,8 +1187,8 @@ layout: false
 
 .right-column[
 ## F.I.R.S.T
-- **F**ast — tests should be able to be executed often
-###- **I**solated — tests on their own cannot depend on external factors or on the result of another test
+- **F**ast - tests should be able to be executed often
+###- **I**solated - tests on their own cannot depend on external factors or on the result of another test
 ]
 
 ---
@@ -1094,9 +1202,9 @@ layout: false
 
 .right-column[
 ## F.I.R.S.T
-- **F**ast — tests should be able to be executed often
-- **I**solated — tests on their own cannot depend on external factors or on the result of another test
-###- **R**epeatable — tests should have the same result every time we run them.
+- **F**ast - tests should be able to be executed often
+- **I**solated - tests on their own cannot depend on external factors or on the result of another test
+###- **R**epeatable - tests should have the same result every time we run them.
 ]
 
 ---
@@ -1111,10 +1219,10 @@ layout: false
 
 .right-column[
 ## F.I.R.S.T
-- **F**ast — tests should be able to be executed often
-- **I**solated — tests on their own cannot depend on external factors or on the result of another test
-- **R**epeatable — tests should have the same result every time we run them
-###- **S**elf-verifying — tests should include assertions; no human intervention needed
+- **F**ast - tests should be able to be executed often
+- **I**solated - tests on their own cannot depend on external factors or on the result of another test
+- **R**epeatable - tests should have the same result every time we run them
+###- **S**elf-verifying - tests should include assertions; no human intervention needed
 ]
 
 ---
@@ -1131,11 +1239,11 @@ layout: false
 
 .right-column[
 ## F.I.R.S.T
-- **F**ast — tests should be able to be executed often
-- **I**solated — tests on their own cannot depend on external factors or on the result of another test
-- **R**epeatable — tests should have the same result every time we run them
-- **S**elf-verifying — tests should include assertions; no human intervention needed
-###- **T**imely — tests should be written along with the production code
+- **F**ast - tests should be able to be executed often
+- **I**solated - tests on their own cannot depend on external factors or on the result of another test
+- **R**epeatable - tests should have the same result every time we run them
+- **S**elf-verifying - tests should include assertions; no human intervention needed
+###- **T**imely - tests should be written along with the production code
 ]
 
 ---
