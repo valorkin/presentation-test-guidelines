@@ -1,7 +1,6 @@
 name: inverse
 layout: true
 class: center, middle, inverse
-page: 1
 ---
 #Writing tests
 ###practical guidelines including
@@ -14,6 +13,51 @@ page: 1
 - Что самое главное в написании тестов? Знание кода? Скилл? Паттерны?
 - Какие цели мы преследуем и что нами движет при написании тестов.
 
+---
+#Do you write tests?
+
+???
+А вы пишите тесты?
+
+---
+
+#What for?
+
+???
+
+Чего ради?
+
+---
+##Finds problems early
+--
+
+##Safe refactor
+--
+
+##Safe code improvment
+--
+
+##Documentation
+--
+
+##Design
+---
+#Yes, but NO
+
+---
+#Humans
+---
+##Any fool can write code that a computer can understand. 
+##Good programmers write code that 
+#*humans* 
+##can understand. 
+
+###Martin Fowler &copy;
+---
+#Goals
+???
+Не поставив правильную цель,
+нельзя получить ожидаемый результат
 ---
 ##TDD
 
@@ -43,6 +87,15 @@ page: 1
 наделённый законченной идеей.
 
 ---
+
+![atdd](images/amazon_attd_count.png)
+![bdd](images/amazon_bdd_count.png)
+![tdd](images/amazon_tdd_count.png)
+![sbe](images/amazon_sbe_count.png)
+
+???
+Об этом была написана пара книг и чуть больше статей и презентаций
+---
 #The .green-text[green] way
 
 ???
@@ -58,12 +111,23 @@ page: 1
 ---
 
 template: inverse
-.h566[![кубик рубика](http://nibler.ru/uploads/users/8161/2013-03-12/rubika-kubika-vidy-eto-interesno-poznavatelno-kartinki_4265216319.jpg)]
+.h566[![кубик рубика](images\rubika-kubika.jpg)]
 
 ???
 
 - Первое, что приходит в голову при виде подобных тестов - Кубик Рубика …
 - И собирать его совсем не хочется.
+
+---
+#The Stranger
+![the_stranger](images/ap/the_stranger.jpg)
+
+???
+
+???
+Чужак (The Stranger)
+
+Кейс, который не относится к unit-тесту, в котором он расположен. Он на самом деле тестирует совершенно другой объект, чаще всего объект, который используется основным тестируемым объектом. Также известен как Дальний Родственник.
 
 ---
 layout: false
@@ -150,6 +214,10 @@ template: inverse
 - постоянная спешка
 - нехватка времени
 
+---
+template: inverse
+#The Mockery
+![the mockery](images/ap/the_mockery.jpg)
 ---
 
 layout: false
@@ -276,6 +344,11 @@ template: inverse
 #Sh*t happens
 
 ---
+#template: inverse
+## 100% covered
+
+# 50% tested
+---
 template: inverse
 #Good things first
 
@@ -288,6 +361,11 @@ template: inverse
 - Не всё так плохо, как кажется. У нас 100% покрытие happy flows, branches and even more.
 - Для интепретируемых языков, php\node.js, код застрахован от опечаток
 - хорошая точка отсчёта
+
+---
+template: inverse
+# The Liar
+![the liar](images/ap/the_liar.jpg)
 
 ---
 layout: false
@@ -310,6 +388,9 @@ layout: false
 
 Unit-тест, который успешно выполняет все кейсы и выглядит работающим правильно, однако при более детальном рассмотрении обнаруживается, что он на самом деле не тестирует то, что должен.
 
+---
+template:inverse
+.w748[![the inspector](images/ap/the_inspector.jpg)]
 ---
 layout: false
 .left-column[
@@ -335,7 +416,7 @@ Unit-тест, который нарушает инкапсуляцию в по�
 ---
 template: inverse
 # Full speed ahead!!!
-
+![full speed ahead](images/full_speed_ahead.jpg)
 ???
 Сейчас я буду всё тестировать
 
@@ -434,30 +515,10 @@ layout: false
 Unit-тест, который тестирует множество второстепенных (и, как правило, простых) мелочей, но не тестирует основное поведение.
 
 ---
-layout: false
-.left-column[
-  ## &nbsp;
-  ### - excessive setup
-  ### - giant
-  ### - the nitpicker
-  ### - the dodger
-  ### - the free ride
-]
 
-.right-column[
-## Symptoms: The Free Ride
-
-
-```js
-// here will be sample
-```
-]
-
-???
-
-Заяц (The Free Ride)
-
-Вместо того, чтобы написать новый кейс-метод, просто добавляется новый assert к существующему кейсу.
+template: inverse
+# The One
+![the one](images/ap/the_one.jpg)
 
 ---
 layout: false
@@ -467,7 +528,6 @@ layout: false
   ### - giant
   ### - the nitpicker
   ### - the dodger
-  ### - the free ride
   ### - the one
 ]
 
@@ -492,7 +552,10 @@ template: inverse
 #It has to be done!
 
 ---
-
+template: inverse
+#The free ride
+![the free ride](images/ap/the_free_ride.jpg)
+---
 layout: false
 .left-column[
   ## &nbsp;
@@ -535,6 +598,11 @@ layout: false
 Счётчик (The Enumerator)
 
 Unit-тест, в котором все кейсы плохо именованы (например, test1, test2, test3). В результате назначение тест-кейса неясно и единственный способ понять, что сломалось — лезть в код теста и молиться, чтобы он оказался понятным.
+
+---
+template: inverse
+#The ice-cream cone
+.h566[![](images/the_ice_cream_cone.png)]
 
 ---
 template: inverse
@@ -611,6 +679,10 @@ layout: false
 
 Unit-тест, который забивает консоль множеством диагностических сообщений, логов и другой информацией, даже если тест проходит успешно. Иногда является результатом ненужного кода, который не был удалён после отладки теста. 
 
+---
+template: inverse
+#The Slow Poke
+![](images/ap/the_slow_poke.png)
 ---
 
 layout: false
@@ -773,6 +845,110 @@ layout: false
 ## Make it works then make it pretty
 ]
 ???
+
+---
+template: inverse
+# Unit test patterns
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - state based
+]
+
+.right-column[
+## State-based tests Pattern
+
+
+```js
+// here will be sample
+```
+]
+
+???
+
+Test code result exposed in code state change
+- Values directly returned from the method
+- Values exposed through the object fields
+- Values exposed through other methods or properties of the object
+- Values that come from outside the object, for example static state or a shared data structure.
+
+Pros: fast, low coupled, readability
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - state based
+  ### - interaction based
+]
+
+.right-column[
+## Interaction-based tests Pattern
+
+
+```js
+// here will be sample
+```
+]
+
+???
+
+If tested methods do not expose results directly (logs, transactions)
+- tested logic calls methods on other dependencies
+- check: method got called
+- check: passed arguments
+ 
+cons: 
+- require knowledge about internals
+- less robust
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - state based
+  ### - interaction based
+  ### - exception testing
+]
+
+.right-column[
+## Exception Testing Pattern
+
+
+```js
+// here will be sample
+```
+]
+
+???
+
+Throwing exceptions is a part of app life loop?
+
+At least exceptions handling
+
+---
+layout: false
+.left-column[
+  ## &nbsp;
+  ### - state based
+  ### - interaction based
+  ### - exception testing
+  ### - algorithm testing
+]
+
+.right-column[
+## Algorithm Testing Pattern
+
+
+```js
+// here will be sample
+```
+]
+
+???
+
+Is all about math or internal logic
 
 ---
 template: inverse
@@ -961,110 +1137,6 @@ layout: false
 - **S**elf-verifying — tests should include assertions; no human intervention needed
 ###- **T**imely — tests should be written along with the production code
 ]
-
----
-template: inverse
-# Unit test patterns
-
----
-layout: false
-.left-column[
-  ## &nbsp;
-  ### - state based
-]
-
-.right-column[
-## State-based tests Pattern
-
-
-```js
-// here will be sample
-```
-]
-
-???
-
-Test code result exposed in code state change
-- Values directly returned from the method
-- Values exposed through the object fields
-- Values exposed through other methods or properties of the object
-- Values that come from outside the object, for example static state or a shared data structure.
-
-Pros: fast, low coupled, readability
----
-layout: false
-.left-column[
-  ## &nbsp;
-  ### - state based
-  ### - interaction based
-]
-
-.right-column[
-## Interaction-based tests Pattern
-
-
-```js
-// here will be sample
-```
-]
-
-???
-
-If tested methods do not expose results directly (logs, transactions)
-- tested logic calls methods on other dependencies
-- check: method got called
-- check: passed arguments
- 
-cons: 
-- require knowledge about internals
-- less robust
-
----
-layout: false
-.left-column[
-  ## &nbsp;
-  ### - state based
-  ### - interaction based
-  ### - exception testing
-]
-
-.right-column[
-## Exception Testing Pattern
-
-
-```js
-// here will be sample
-```
-]
-
-???
-
-Throwing exceptions is a part of app life loop?
-
-At least exceptions handling
-
----
-layout: false
-.left-column[
-  ## &nbsp;
-  ### - state based
-  ### - interaction based
-  ### - exception testing
-  ### - algorithm testing
-]
-
-.right-column[
-## Algorithm Testing Pattern
-
-
-```js
-// here will be sample
-```
-]
-
-???
-
-Is all about math or internal logic
 
 ---
 template: inverse
