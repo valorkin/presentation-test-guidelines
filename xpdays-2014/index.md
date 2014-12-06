@@ -9,32 +9,31 @@ class: center, middle, inverse
 
 ???
 
-- У всех тестов, как и любого когда есть одна общая проблема: они написаны людьми.
+- Какая общая проблема у тестов и кода?
+- У всех тестов, как и любого кода есть одна общая проблема: они написаны людьми.
 - Что самое главное в написании тестов? Знание кода? Скилл? Паттерны?
 - Какие цели мы преследуем и что нами движет при написании тестов.
 
 ---
-#Do you write tests?
+![](images/ap.jpg)
+---
+## Common problem of tests and code?
+--
 
+## What do a most impact on tests quality?
 ???
-А вы пишите тесты?
+- знание production кода
+- скилы
+- используемые паттерны
+--
+
+## Writing test goals?
 
 ---
-
-#What for?
-
-???
-
-Чего ради?
-
----
-##Finds problems early
+##Finds problems early (regression)
 --
 
 ##Safe refactor
---
-
-##Safe code improvment
 --
 
 ##Documentation
@@ -44,8 +43,19 @@ class: center, middle, inverse
 ---
 #Yes, but NO
 
+???
+- Common problem of tests and code?
+- What do a most impact on tests quality?
+- Writing test goals?
+
 ---
 #Humans
+
+???
+- Common problem of tests and code?
+- What do a most impact on tests quality?
+- Writing test goals?
+
 ---
 ##Any fool can write code that a computer can understand. 
 ##Good programmers write code that 
@@ -53,12 +63,30 @@ class: center, middle, inverse
 ##can understand. 
 
 ###Martin Fowler &copy;
+
+???
+- сделать нам жизнь проще
+- в случае чего показать регрессию кода
+- если тест упал, быстро понять где, почему и в каком контексте
+- т.е. в целом экономить время и усилия
+- сейчас посмотрим, как такие благородные цели 
+- как лень... т.е. продуктивность можно зафакапить
+- неправильной мотивацией
 ---
 #Goals
 ???
 Не поставив правильную цель,
 нельзя получить ожидаемый результат
 ---
+![atdd](images/amazon_attd_count.png)
+![bdd](images/amazon_bdd_count.png)
+![tdd](images/amazon_tdd_count.png)
+![sbe](images/amazon_sbe_count.png)
+
+???
+Об этом была написана пара книг и чуть больше статей и презентаций
+---
+
 ##TDD
 
 ###Test Driven Development
@@ -71,6 +99,7 @@ class: center, middle, inverse
 # Development cycle
 ![img](images/tdd_red_green_refactor.jpg)
 ???
+Цикл разработки
 - Пишем тест, роняем его, пишем код, запускаем тесты, рефакторим и так по
 кругу, пока не озеленим все тесты
 - Почти у каждого из нас есть в команде человек, у которого знания о TDD на
@@ -83,19 +112,11 @@ class: center, middle, inverse
 
 ???
 - BDD привносит смысл и читабельность тестовых спецификаций
-- Теперь мы тестируем не абстрактную функцию в вакууме, а элемент ("unit"),
+- Теперь мы тестируем не абстрактный код в вакууме, а элемент ("unit"),
 наделённый законченной идеей.
 
 ---
 
-![atdd](images/amazon_attd_count.png)
-![bdd](images/amazon_bdd_count.png)
-![tdd](images/amazon_tdd_count.png)
-![sbe](images/amazon_sbe_count.png)
-
-???
-Об этом была написана пара книг и чуть больше статей и презентаций
----
 #The .green-text[green] way
 
 ???
@@ -139,8 +160,28 @@ layout: false
 ## Symptoms: The Stranger
 
 
+.red[BAD]
+
 ```js
-// here will be sample
+  describe('if user transfering money', function(){
+    it('user should be logged in', function (){
+      assert(request.user !== null,
+        'err: user not logged in');
+    });
+  });
+```
+
+.green-text[GOOD]
+
+```js
+  describe('isAuthenticated', function(){
+    describe('if user logged in', function (){
+      it('should store user in request', function (){
+        assert(request.user !== null,
+          'err: user not logged in');
+      });
+    });
+  });
 ```
 ]
 
@@ -158,8 +199,31 @@ layout: false
 .right-column[
 ## Symptoms: Success Against All Odds
 
+.red[BAD]
+
 ```js
-// here will be sample
+  describe('isAdmin', function(){
+    describe('if user logged in', function (){
+      it('should store user in request', function (){
+        assert(request.user !== null,
+          'err: user not logged in');
+      });
+    });
+  });
+```
+
+.green-text[GOOD]
+
+```js
+  describe('isAdmin', function(){
+    describe('if user logged in', function (){
+      ...
+      it('should have have admin role', function (){
+        assert(request.user.roles.contain('admin'),
+          'err: user is not an admin');
+      });
+    });
+  });
 ```
 ]
 
@@ -230,7 +294,15 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('any', function(){
+  it('should do something', function(){
+    action.stub().return(some);
+    getSome.mock().expect.to.be.calledOnce;
+    getSome.mock().expect.to.be.calledWith(params);
+    getSome.mock().stub().return(list);
+    // etc..
+  });  
+});
 ```
 ]
 
@@ -253,7 +325,15 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('money transfer', function (){
+  it('should throw err if receiver is not specified', function(){
+    try{
+      transferModey(user, null, -150);
+    } catch (e){
+      console.log('ups');
+    }
+  });
+});
 ```
 ]
 
@@ -277,7 +357,23 @@ layout: false
 
 
 ```js
-// here will be sample
+function getFirstSocialFriends(){
+  return [
+    db.getFirstFacebookFriend(),
+    db.getFirstGoglePlusFriend(),
+    db.getFirstTwitterFriend()
+  ];
+}
+
+
+describe('getting social first social friends', function(){
+  it('should get first faceebook friend',  function (){
+    var friends = getFirstSocialFriends();
+    assert(isFacebookFriend(friends[0]);
+
+    assert(_.any(friends, isFacebookFriend));
+   });
+});
 ```
 ]
 
@@ -322,7 +418,7 @@ template: inverse
 - И ставим цель: 100% покрытие кода тестами
 ---
 template: inverse
-.h566[![](http://thumbs.dreamstime.com/x/fire-speedometer-16726304.jpg)]
+.h566[![](images/speedometer.jpg)]
 
 ???
 
@@ -341,8 +437,12 @@ template: inverse
 - что могло пойти не так?
 ---
 template: inverse
-#Sh*t happens
+![boom](images/boom.jpg)
 
+---
+template: inverse
+#Sh*t happens
+  
 ---
 template: inverse
 ## 100% covered
@@ -367,6 +467,12 @@ template: inverse
 # The Liar
 ![the liar](images/ap/the_liar.jpg)
 
+???
+
+Лжец (The Liar)
+
+Unit-тест, который успешно выполняет все кейсы и выглядит работающим правильно, однако при более детальном рассмотрении обнаруживается, что он на самом деле не тестирует то, что должен.
+
 ---
 layout: false
 .left-column[
@@ -378,7 +484,17 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('transfer money', function (){
+  it('should withdraw money', function(){
+    receiver.deposit(amount);
+
+    receiver.deposit.should.be.called;
+
+    // or
+    assert(user.balance ===
+      user_before_deposit.balance + amount);
+  });
+});
 ```
 ]
 
@@ -391,6 +507,13 @@ Unit-тест, который успешно выполняет все кейс�
 ---
 template:inverse
 .w748[![the inspector](images/ap/the_inspector.jpg)]
+
+???
+
+Инспектор (The Inspector)
+
+Unit-тест, который нарушает инкапсуляцию в попытке достичь 100% покрытия кода (code coverage) и при этом знает слишком много о тестируемой системе. При рефакторинге системы такой тест слишком часто ломается и требует исправлений.
+
 ---
 layout: false
 .left-column[
@@ -403,9 +526,20 @@ layout: false
 
 
 ```js
-// here will be sample
-```
-]
+function transferMoney(emiter, receiver, amount){
+  emiter.withdraw(amount);
+  receiver.deposit(amount);
+}
+
+describe('transfering money', function (){
+  it('should deposit money', function(){
+    transferMoney(emiter, receiver, amount);
+
+    assert(emiter.balance === 
+      (emiter_before_transfer.balance - balance));
+  });
+});
+```]
 
 ???
 
@@ -434,7 +568,19 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('rocket', function (){
+  beforeEach(function(){ //setup
+    gatherScientists();
+    buildRocketPlan();
+    gatherEngineers();
+    buildRocketParts();
+    gatherRocket();
+  });
+
+  it('should be a rocket', function (){
+    assert(isRocket(rocket));
+  });
+});
 ```
 ]
 
@@ -457,7 +603,20 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('rocket', function (){
+  before(function(){ //setup
+    gatherScientists();
+    ...
+    gatherRocket();
+  });
+
+  it('should be a rocket', function (){
+    assert(isRocket(rocket));
+  });
+  it('should have engine', ...);
+  it('should have jet', ...);
+  it('should have pilot', ...);
+});
 ```
 ]
 
@@ -481,7 +640,9 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('transfer money route', function (){
+// here should be a code sample
+});
 ```
 ]
 
@@ -506,7 +667,19 @@ layout: false
 
 
 ```js
-// here will be sample
+function depositMoney(receiver, amount){
+  receiver.deposit(amount);
+}
+
+describe('deposit money', function (){
+  it('should deposit money', function(){
+    var receiver = new User();
+
+    depositMoney(receiver, amount);
+
+    assert(isUser(receiver));
+  });
+});
 ```
 ]
 
@@ -521,6 +694,12 @@ Unit-тест, который тестирует множество второс
 template: inverse
 # The One
 ![the one](images/ap/the_one.jpg)
+
+???
+
+Избранный (The One)
+
+Комбинация нескольких анти-паттернов, в особенности «Зайца» и Гиганта. Такой unit-тест состоит из единственного метода, который тестирует всю функциональность объета. Типичным индикатором проблемы являтся название тестового метода по названию unit-теста и большое количество строк инициализации и assert-ов.
 
 ---
 layout: false
@@ -538,7 +717,16 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('user.js', function(){
+  it('getUser', function (){
+    ...
+    // test all the stuff
+    assert(...);
+    assert(...);
+    assert(...);
+    ....
+  });
+});
 ```
 ]
 
@@ -557,6 +745,13 @@ template: inverse
 template: inverse
 #The free ride
 ![the free ride](images/ap/the_free_ride.jpg)
+
+???
+
+Заяц (The Free Ride)
+
+Вместо того, чтобы написать новый кейс-метод, просто добавляется новый assert к существующему кейсу.
+
 ---
 layout: false
 .left-column[
@@ -569,7 +764,13 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('...', function(){
+  it('...', function(){
+    ...
+    // new assert, usually not connected to current test cases
+    assert(...); 
+  });
+});
 ```
 ]
 
@@ -592,7 +793,11 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('module 1', function(){
+  it('test1', ...);
+  it('test2', ...);
+  it('test3', ...);
+});
 ```
 ]
 
@@ -624,7 +829,19 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('users service', function(){
+  var _users = [];
+  it('should get users', function (){
+    ...
+    _users = userService.getUsers();
+    ...
+  });
+
+  it('user list should be sorted', function(){
+    ...
+    assert(isSirted(_users));
+  });
+});
 ```
 ]
 
@@ -647,7 +864,11 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('money transfer', function(){
+  it('should be fine', function(){
+    callToFunctionWhichShouldNotThrow();
+  });
+});
 ```
 ]
 
@@ -672,7 +893,14 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('money transfer', function(){
+  it('should transfer money', function (){
+    ...
+    console.log('money was successfully transfered');
+    ...
+  });
+});
+
 ```
 ]
 
@@ -680,12 +908,19 @@ layout: false
 
 Крикун (The Loudmouth)
 
-Unit-тест, который забивает консоль множеством диагностических сообщений, логов и другой информацией, даже если тест проходит успешно. Иногда является результатом ненужного кода, который не был удалён после отладки теста. 
+Unit-тест, который забивает консоль множеством диагностических сообщений, логов и другой информацией, даже если тест проходит успешно. Иногда является результатом ненужного кода, который не был удалён после отладки теста.
 
 ---
 template: inverse
 #The Slow Poke
 ![](images/ap/the_slow_poke.png)
+
+???
+
+Тормоз (The Slow Poke)
+
+Unit-тест, который выполняется крайне медленно. Когда разработчик запускает его, то у него появляется достаточно времени, чтобы сходить в туалет или покурить. Или, что может быть ещё хуже, он не станет дожидаться завершения тестирования перед тем, как вечером закоммититься и пойти домой.
+
 ---
 
 layout: false
@@ -702,7 +937,12 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('social integration', function(){
+  it('get Snoop Dogg facebook friends', function(){
+    // mocks are evel
+    var friends = social.getAllFacebookFriends();
+  });
+});
 ```
 ]
 
@@ -712,6 +952,10 @@ layout: false
 
 Unit-тест, который выполняется крайне медленно. Когда разработчик запускает его, то у него появляется достаточно времени, чтобы сходить в туалет или покурить. Или, что может быть ещё хуже, он не станет дожидаться завершения тестирования перед тем, как вечером закоммититься и пойти домой.
 
+---
+template: inverse
+## Anal probe
+.w748[![](images/ap/the_anal_probe.jpg)]
 ---
 template: inverse
 #Brittle tests
@@ -732,7 +976,11 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('files reader', function(){
+  it('should use correct path separator', function(){
+    assert(process.environment.path.separator === '\');
+  });
+});
 ```
 ]
 
@@ -756,7 +1004,19 @@ layout: false
 
 
 ```js
-// here will be sample
+function doSomeActionDepandantOnDefaults(){
+  var default = getSystemDefaults();
+}
+
+describe('money transfer', function(){
+  it('should deposit money', function(){
+    
+    ...
+    doSomeActionDepandantOnDefaults();
+    ...
+    assert(...);
+  });
+});
 ```
 ]
 
@@ -781,7 +1041,19 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('users service', function(){
+  var _users = [];
+  it('should get users', function (){
+    ...
+    _users = userService.getUsers();
+    ...
+  });
+
+  it('user list should be sorted', function(){
+    ...
+    assert(isSirted(_users));
+  });
+});
 ```
 ]
 
@@ -879,7 +1151,19 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('calc', function (){
+  it('should sum two numbers', function(){
+    // arrange
+    var calc = new Calc();
+    var a = 2, b = 3;
+    var expectedSum = 5;
+    // act
+    var sum = calc.sum(a, b);
+
+    //assert
+    assert.equal(sum, expectedSum);
+  });
+});
 ```
 ]
 
@@ -905,7 +1189,20 @@ layout: false
 
 
 ```js
-// here will be sample
+function transferMoney(){
+  deposit();
+  log.append('deposit to user successful');
+  ...
+}
+
+deposit('money transfer', function (){
+  it('should log action result states', function() {
+    // extract dependency
+    // add spy or stub a function
+    // setup expectations
+    log.append.should.be.calledWith(/deposit.*successful/ig);
+  });
+});
 ```
 ]
 
@@ -934,7 +1231,13 @@ layout: false
 
 
 ```js
-// here will be sample
+describe('transfer money', function(){
+  it('should throw an exception if amount is not a number', 
+    function(){
+      assert.throws(transferMoney(emiter, receiver, 'monkey'),
+        ValueValidationException);
+  });
+});
 ```
 ]
 
@@ -957,10 +1260,7 @@ layout: false
 .right-column[
 ## Algorithm Testing Pattern
 
-
-```js
-// here will be sample
-```
+### You can brake a rules a bit to test most valuable logic
 ]
 
 ???
@@ -983,7 +1283,7 @@ layout: false
 ###**Arrange**: setup everything needed for the running the tested code. This includes any initialization of dependencies, mocks and data needed for the test to run
 ]
 ???
-
+- **Arrange**: setup everything needed for the running the tested code. This includes any initialization of dependencies, mocks and data needed for the test to run
 ---
 layout: false
 .left-column[
@@ -1000,7 +1300,7 @@ layout: false
 ### **Act**: Invoke the code under test.
 ]
 ???
-
+- Invoke the code under test.
 ---
 
 layout: false
@@ -1021,7 +1321,7 @@ layout: false
 ### **Assert**: Specify the pass criteria for the test, which fails it if not met.
 ]
 ???
-
+- **Assert**: Specify the pass criteria for the test, which fails it if not met.
 ---
 
 layout: false
@@ -1037,7 +1337,21 @@ layout: false
 ## Test case structure
 
 ```js
-// here will be sample
+describe('money transger', function(){
+  it('should transfer money', function(){
+    // Arrange
+    var receiver = new User({name: 'Scoot'});
+    var emiter = new User({name: 'Robert'});
+    var amount = 100500;
+
+    // Act
+    transferMoney(emiter, receiver, amount);
+
+    //Assert
+    doWithdraw.should.be.calledWith(emiter, amount);
+    doDeposit.should.be.calledWith(receiver, amount);
+  });  
+});
 ```
 ]
 ???
@@ -1056,10 +1370,34 @@ layout: false
 ## Test suite structure
 
 ```js
-// here will be sample
+describe('money transger', function(){
+  before(function (){
+      // setup context
+  });
+
+  after(function(){
+    // cleanup context
+  });
+
+  it('should transfer money', function(){
+    // Arrange === Setup call params, fakes, etc.
+    var receiver = new User({name: 'Scoot'});
+    var emiter = new User({name: 'Robert'});
+    var amount = 100500;
+
+    // Act === Execute
+    transferMoney(emiter, receiver, amount);
+
+    //Assert === Validate
+    doWithdraw.should.be.calledWith(emiter, amount);
+    doDeposit.should.be.calledWith(receiver, amount);
+  });  
+});
 ```
 ]
 ???
+- всё тоже самое, но setup\clean подготавливают контекст данных
+- конфигурируют среду выполнения тестируемого метода
 ---
 template:inverse
 #A few simple rules to follow
@@ -1073,6 +1411,9 @@ layout: false
 .right-column[
 ##- Keep test cases focused, one unit test per behaviour
 ]
+
+???
+- Keep test cases focused, one unit test per behaviour
 ---
 
 layout: false
@@ -1085,9 +1426,11 @@ layout: false
 ###- Keep test cases focused, one unit test per behaviour
 ##- Use builder pattern to Arrange and CleanUp
 ```js
-// here will be code sample
+var user = UserBuilder.create().withName('Scoot');
 ```
 ]
+???
+- Use builder pattern to Arrange and CleanUp
 
 ---
 
@@ -1104,9 +1447,14 @@ layout: false
 ##- Extract and aggregate stubs into simulators, and **test** them
 ]
 
+???
+- Extract and aggregate stubs into simulators, and **test** them
+
 ---
 template: inverse
 #80/20
+???
+- Test code important like production code
 ---
 
 layout: false
@@ -1125,6 +1473,9 @@ layout: false
 ###- Test only what is important
 ##- Test code important like production code
 ]
+
+???
+- Test code important like production code
 
 ---
 
@@ -1177,6 +1528,9 @@ layout: false
 ###- **F**ast - tests should be able to be executed often
 ]
 
+???
+- **F**ast - tests should be able to be executed often
+
 ---
 layout: false
 .left-column[
@@ -1190,6 +1544,9 @@ layout: false
 - **F**ast - tests should be able to be executed often
 ###- **I**solated - tests on their own cannot depend on external factors or on the result of another test
 ]
+
+???
+- **I**solated - tests on their own cannot depend on external factors or on the result of another test
 
 ---
 layout: false
@@ -1207,6 +1564,8 @@ layout: false
 ###- **R**epeatable - tests should have the same result every time we run them.
 ]
 
+???
+- **R**epeatable - tests should have the same result every time we run them.
 ---
 layout: false
 .left-column[
@@ -1224,6 +1583,9 @@ layout: false
 - **R**epeatable - tests should have the same result every time we run them
 ###- **S**elf-verifying - tests should include assertions; no human intervention needed
 ]
+
+???
+- **S**elf-verifying - tests should include assertions; no human intervention needed
 
 ---
 
@@ -1246,6 +1608,9 @@ layout: false
 ###- **T**imely - tests should be written along with the production code
 ]
 
+???
+- **T**imely - tests should be written along with the production code
+
 ---
 template: inverse
 # Questions?
@@ -1253,4 +1618,8 @@ template: inverse
 ---
 template: inverse
 # Thank you
-.footnote[[@valorkin](https://twitter.com/valorkin)]
+.footnote[
+[@valorkin](https://twitter.com/valorkin)
+
+[valorkin@gmail.com](https://twitter.com/valorkin)
+]
