@@ -569,7 +569,8 @@ layout: false
 
 ```js
 describe('rocket', function (){
-  beforeEach(function(){ //setup
+  //setup
+  beforeEach(function(){
     gatherScientists();
     buildRocketPlan();
     gatherEngineers();
@@ -641,7 +642,20 @@ layout: false
 
 ```js
 describe('transfer money route', function (){
-// here should be a code sample
+  it('should transfer money', function (){
+    var user = new User({
+      balance: 100500,
+      name: 'Scoot',
+      email: 'scoot@gmail.com'
+    });
+    ...
+    transferMoney(user, ...);
+    ...
+    assert.equals(emiter.balance, ...);
+    
+    assert.equals(emiter.name, user.name);
+    assert.equals(emiter.email, user.email);
+  });
 });
 ```
 ]
