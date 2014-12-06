@@ -280,8 +280,22 @@ template: inverse
 
 ---
 template: inverse
+![](images/mvp.png)
+
+???
+- это окей если вы деливерете MVP слайсы
+
+---
+template: inverse
 #The Mockery
 ![the mockery](images/ap/the_mockery.jpg)
+
+???
+
+Подделка (The Mockery)
+
+Mocking можеть быть очень удобным и правильным. Но случается, что разработчики теряют чувство меры и используют его даже для тех частей системы, которые в принципе должны участвовать в тестировании. В этом случае unit-тест содержит так много mocks, заглушек (stubs) и фейков (fakes), что часть системы остается не протестированной.
+
 ---
 
 layout: false
@@ -550,6 +564,12 @@ Unit-тест, который нарушает инкапсуляцию в по�
 ---
 template: inverse
 # Full speed ahead!!!
+
+???
+
+Всё круто, мы всё знаем
+приезжаем домой заряженные
+...
 ---
 template: inverse
 ![full speed ahead](images/full_speed_ahead.jpg)
@@ -651,10 +671,10 @@ describe('transfer money route', function (){
     ...
     transferMoney(user, ...);
     ...
-    assert.equals(emiter.balance, ...);
-    
-    assert.equals(emiter.name, user.name);
-    assert.equals(emiter.email, user.email);
+    assert.equal(emiter.balance, ...);
+
+    assert.equal(emiter.name, user.name);
+    assert.equal(emiter.email, user.email);
   });
 });
 ```
@@ -1080,6 +1100,11 @@ describe('users service', function(){
 ---
 template: inverse
 #Development style
+
+???
+
+Стиль разработки
+- во многом привнесён адептами TDD
 ---
 layout: false
 .left-column[
